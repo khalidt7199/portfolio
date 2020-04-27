@@ -9,6 +9,7 @@ use App\aboutus;
 use App\companydetail;
 use App\subcategory;
 use App\team;
+use App\product;
 
 class PortfolioController extends Controller
 {
@@ -24,7 +25,8 @@ class PortfolioController extends Controller
         $about=aboutus::all();
         $team=team::all();
         $comp=companydetail::all();
-        return view('index',compact('cat','subcat','about','team','comp'));
+        $prd=product::all();
+        return view('index',compact('cat','subcat','about','team','comp', 'prd'));
         //return view('index');
     }
 
