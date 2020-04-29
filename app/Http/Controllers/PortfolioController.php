@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+
 use App\category;
 use App\aboutus;
 use App\companydetail;
@@ -24,7 +25,10 @@ class PortfolioController extends Controller
         $about=aboutus::all();
         $team=team::all();
         $comp=companydetail::all();
-        return view('index',compact('cat','subcat','about','team','comp'));
+        
+        $servicedetail=DB::table('categories')->join('subcategories','categories.catID','=','subcategories.catID')
+        ->where('categories.categoryname','Services')->get();
+        return view('index',compact('cat','subcat','about','team','comp','servicedetail'));
         //return view('index');
     }
 

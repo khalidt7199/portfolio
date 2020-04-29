@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Agency - Start Bootstrap Theme</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="assets/img/logos/logo.png" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -20,7 +18,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/navbar-logo.svg" /></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
+                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/logos/logo.png" /></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
                     @foreach($cat as $row)
@@ -51,24 +49,27 @@
                     
                 </div>
                     @if($row->categoryname=='Services')
-                
-                <div class="row text-center">
+                    <div class="row text-center">
+                @foreach($servicedetail as $data)
+              
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i></span>
-                        <h4 class="my-3">E-Commerce</h4>
-                       
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-laptop fa-stack-1x fa-inverse"></i></span>
-                        <h4 class="my-3">Responsive Design</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-lock fa-stack-1x fa-inverse"></i></span>
-                        <h4 class="my-3">Web Security</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
+                        <h4 class="my-3">{{$data->subcategoryname}}</h4>
+                        <p class="text-muted">
+                        <?php
+                        $str_arr = explode (",", $data->description);  
+                        for($i = 0; $i < count($str_arr); $i++)  {
+                            echo $str_arr[$i]."<br/>";
+                        } 
+                        
+                    
+                    
+                        ?>
+                        </p>
+                        </div>
+                    @endforeach
+                   
+                   
                 </div>
                 
             </div>
@@ -223,8 +224,9 @@
             <div class="container">
                 
                 <div class="row">
-                    <div class="col-lg-4">
                       @foreach($team as $row)
+                      <div class="col-lg-4">
+
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="" />
                             <h4>{{$row->membersname}}</h4>
