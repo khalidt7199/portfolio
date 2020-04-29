@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Agency - Start Bootstrap Theme</title>
+        <title>Bestower solutions</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
@@ -20,7 +20,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/navbar-logo.svg" /></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
+                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="http://academy.bestowersolutions.com/wp-content/uploads/2019/10/logo.png" alt="Bestower solution"></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
                     @foreach($cat as $row)
@@ -77,17 +77,23 @@
        
         <!-- Portfolio Grid-->
         <section class="page-section bg-light" id="portfolio">
+      @foreach($subcat as $sub)
+      
             <div class="container">
+               <h3 style="margin-left:35%;color:#e3342f;justify-content:center">{{$sub->subcategoryname}}</h3>
                
-                <div class="row">
+               <div class="row ">
+                   
                 @foreach($prd as $row)
-                    <div class="col-lg-4 col-sm-6 mb-4">
+
+                @if($row->subcategoryname == $sub->subcatID)
+                    <div class="col-lg-3 col-sm-3 mb-3">
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-toggle="modal" href="#portfolio{{$row->productid}}"
                                 ><div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="{{$row->image}}" alt=""
+                                <img class="img-fluid" src="{{asset($row->image)}}" alt="..."
                             /></a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">{{$row->productname}}</div>
@@ -108,11 +114,13 @@
                                     <h2 class="text-uppercase">{{$row->productname}}</h2>
                                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                                     <img class="img-fluid d-block mx-auto" src="{{$row->image}}" alt="" />
-                                    <p>{{$row->description}}</p>
+                                    <p>{{$row->desc}}</p>
                                     <ul class="list-inline">
-                                        <li>Date: January 2020</li>
+                                        <li><a href="{{$row->url}}">{{$row->url}}</a></li>
                                         <li>Client: Threads</li>
-                                        <li>Category: Illustration</li>
+                                       
+                                        <li>{{$row->subcategory->subcategoryname}}</li>
+                                       
                                     </ul>
                                     <button class="btn btn-primary" data-dismiss="modal" type="button"><i class="fas fa-times mr-1"></i>Close Project</button>
                                 </div>
@@ -122,9 +130,16 @@
                 </div>
             </div>
         </div>
-                   @endforeach
+    
+        @endif
+        @endforeach
                 </div>
+                
             </div>
+
+
+            </div>
+            @endforeach
         </section>
         @elseif($row->categoryname=='About')
         <!-- About-->

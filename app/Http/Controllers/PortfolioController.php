@@ -25,9 +25,15 @@ class PortfolioController extends Controller
         $about=aboutus::all();
         $team=team::all();
         $comp=companydetail::all();
-        $prd=product::all();
+        $prdid=product::pluck('productid'); $prd = array();
+        $prdid=product::pluck('productid');
+        foreach($prdid as $id){
+            $data = product::where('productid',$id)->first();
+            $data->subcategory;
+            $prd[] = $data;
+        }
         return view('index',compact('cat','subcat','about','team','comp', 'prd'));
-        //return view('index');
+        //return dd($prd);
     }
 
     /**
