@@ -46,6 +46,8 @@
             <div class="container">
             <div class="text-center">
                     <h2 class="section-heading text-uppercase">{{$row->categoryname}}</h2>
+                    <br>
+                    
                     
                 </div>
                     @if($row->categoryname=='Services')
@@ -53,7 +55,7 @@
                 @foreach($servicedetail as $data)
               
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i></span>
+                    <img src="{{$data->image}}"   style="height:10px width:10px;border-radius:50%;" >
                         <h4 class="my-3">{{$data->subcategoryname}}</h4>
                         <p class="text-muted">
                         <?php
@@ -179,7 +181,7 @@
                     <ul class="timeline">
                     @if(($c%2)==0)  
                     <li>
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="" /></div>
+                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="{{$row->image}}" /></div>
                         <div class="timeline-panel">
                         <div class="timeline-heading">
                                
@@ -194,7 +196,7 @@
                     @elseif(($c%2)==1) 
                     <li class="timeline-inverted">
 
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="" /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{{$row->image}}"  /></div>
                         <div class="timeline-panel">
                         <div class="timeline-heading">
                                
@@ -228,7 +230,7 @@
                       <div class="col-lg-4">
 
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="" />
+                            <img class="mx-auto rounded-circle" src="{{$row->image}}" alt="" />
                             <h4>{{$row->membersname}}</h4>
                             <p class="text-muted">{{$row->description}}</p>
                             <!-- <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a> -->
@@ -240,31 +242,24 @@
                 </div>
                 
             </div>
+
         </section>
-        <!-- Clients-->
-        <section class="py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="assets/img/logos/envato.jpg" alt="" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="assets/img/logos/designmodo.jpg" alt="" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="assets/img/logos/themeforest.jpg" alt="" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="assets/img/logos/creative-market.jpg" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
         @elseif($row->categoryname=='Contact')
         <!-- Contact-->
+        <div style="background-color:grey;  border:3px solid; color:black; ">
+        @foreach($comp as $data)
+                Business Name:  {{$data->companyname}}<br>
+                Business Address:  {{$data->address}} <br>
+                Email:  {{$data->email}}<br>
+                Cell:  {{$data->contact}}<br>
+                Contact Person:  {{$data->contactperson}}
+         @endforeach
+    </div>
+
         <section class="page-section" id="contact">
+
             <div class="container">
-                
                 <form id="contactForm" name="sentMessage" novalidate="novalidate">
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-6">
@@ -303,12 +298,14 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
                     <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                     <div class="col-lg-4 text-lg-right"><a class="mr-3" href="#!">Privacy Policy</a><a href="#!">Terms of Use</a></div>
                 </div>
+                </div
             </div>
+
         </footer>
+
         <!-- Portfolio Modals--><!-- Modal 1-->
         <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
