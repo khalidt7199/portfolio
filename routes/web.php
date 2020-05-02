@@ -21,5 +21,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+Route::post('send','PortfolioController@send')->name('send');
 Route::get('/','PortfolioController@index');

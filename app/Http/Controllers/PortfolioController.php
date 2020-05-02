@@ -10,6 +10,7 @@ use App\aboutus;
 use App\companydetail;
 use App\subcategory;
 use App\team;
+use Mail;
 
 class PortfolioController extends Controller
 {
@@ -30,6 +31,23 @@ class PortfolioController extends Controller
         ->where('categories.categoryname','Services')->get();
         return view('index',compact('cat','subcat','about','team','comp','servicedetail'));
         //return view('index');
+    }
+    public function send(Request $request){
+        $name=$request->input('name');
+        $email=$request->input('email');
+        $msg=$request->input('message');
+
+
+  
+        $data = array('email' => $email, 'msg'=>$msg,'name'=>$name);
+
+        Mail::send(['html'=>'mail'],$data,function($message) use($data){
+            $message->to('khalidt7199@gmail.com','khalid')->subject('Message From a visitor');
+            $message->from($data['email'],$data['name']);
+
+        });  
+        return redirect()->back();
+
     }
 
     /**
