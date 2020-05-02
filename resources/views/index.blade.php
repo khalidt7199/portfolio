@@ -6,15 +6,27 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Bestower solutions</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" /> 
         <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script> 
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+
+        
+    <link rel="stylesheet" href="owl/css/docs.theme.min.css">
+
+<!-- Owl Stylesheets -->
+<link rel="stylesheet" href="owl/owlcarousel/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="owl/owlcarousel/assets/owl.theme.default.min.css">
+
+
+<script src="owl/vendors/jquery.min.js"></script>
+<script src="owl/owlcarousel/owl.carousel.js"></script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -74,20 +86,17 @@
             </div>
         </section>
         @elseif($row->categoryname=='Portfolio')
-       
         <!-- Portfolio Grid-->
         <section class="page-section bg-light" id="portfolio">
-      @foreach($subcat as $sub)
-      
+        @foreach($subcat as $sub)
+      @if($sub->subcatID != 2 )
             <div class="container">
-               <h3 style="margin-left:35%;color:#e3342f;justify-content:center">{{$sub->subcategoryname}}</h3>
-               
-               <div class="row ">
-                   
-                @foreach($prd as $row)
-
-                @if($row->subcategoryname == $sub->subcatID)
-                    <div class="col-lg-3 col-sm-3 mb-3">
+               <h3 style="margin-left:40%;color:#e3342f;justify-content:center">{{$sub->subcategoryname}}</h3>
+          <div class="owl-carousel ">
+     
+          @foreach($prd as $row) 
+          @if($row->subcategoryname == $sub->subcatID ) 
+      
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-toggle="modal" href="#portfolio{{$row->productid}}"
                                 ><div class="portfolio-hover">
@@ -97,10 +106,19 @@
                             /></a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">{{$row->productname}}</div>
-                                <div class="portfolio-caption-subheading text-muted">Illustration</div>
+                               
                             </div>
                         </div>
-                    </div>
+               
+                    @endif
+            @endforeach 
+
+        </div>
+        </div>
+                @endif
+                @endforeach
+     
+      @foreach($prd as $row)
                      <!-- Portfolio Modals--><!-- Modal 1-->
         <div class="portfolio-modal modal fade" id="portfolio{{$row->productid}}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
@@ -112,13 +130,11 @@
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
                                     <h2 class="text-uppercase">{{$row->productname}}</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                   
                                     <img class="img-fluid d-block mx-auto" src="{{$row->image}}" alt="" />
                                     <p>{{$row->desc}}</p>
                                     <ul class="list-inline">
                                         <li><a href="{{$row->url}}">{{$row->url}}</a></li>
-                                        <li>Client: Threads</li>
-                                       
                                         <li>{{$row->subcategory->subcategoryname}}</li>
                                        
                                     </ul>
@@ -130,19 +146,13 @@
                 </div>
             </div>
         </div>
-    
-        @endif
         @endforeach
-                </div>
-                
-            </div>
-
-
-            </div>
-            @endforeach
-        </section>
+    </section>
+             
         @elseif($row->categoryname=='About')
         <!-- About-->
+
+        
         <section class="page-section" id="about">
             <div class="container">
                
@@ -283,8 +293,8 @@
        
    
         <!-- Bootstrap core JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+       
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> 
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <!-- Contact form JS-->
@@ -292,5 +302,26 @@
         <script src="assets/mail/contact_me.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="owl/vendors/highlight.js"></script>
+    <script src="owl/js/app.js"></script>
+    <script>
+            $(document).ready(function() {
+              var owl = $('.owl-carousel');
+              owl.owlCarousel({
+                items: 4,
+                loop: true,
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 1500,
+                autoplayHoverPause: true
+              });
+              $('.play').on('click', function() {
+                owl.trigger('play.owl.autoplay', [1000])
+              })
+              $('.stop').on('click', function() {
+                owl.trigger('stop.owl.autoplay')
+              })
+            })
+          </script>
     </body>
 </html>
