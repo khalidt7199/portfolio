@@ -54,33 +54,39 @@
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
             </div>
         </header>
+        </header>
         <!-- Services-->
         @foreach($cat as $row)
         <section class="page-section" id="{{strtolower($row->categoryname)}}">
             <div class="container">
             <div class="text-center">
                     <h2 class="section-heading text-uppercase">{{$row->categoryname}}</h2>
+                    <br>
+                    
                     
                 </div>
                     @if($row->categoryname=='Services')
-                
-                <div class="row text-center">
+                    <div class="row text-center">
+                @foreach($servicedetail as $data)
+              
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i></span>
-                        <h4 class="my-3">E-Commerce</h4>
-                       
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-laptop fa-stack-1x fa-inverse"></i></span>
-                        <h4 class="my-3">Responsive Design</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-lock fa-stack-1x fa-inverse"></i></span>
-                        <h4 class="my-3">Web Security</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
+                    <img src="{{$data->image}}"   style="height:10px width:10px;border-radius:50%;" >
+                        <h4 class="my-3">{{$data->subcategoryname}}</h4>
+                        <p class="text-muted">
+                        <?php
+                        $str_arr = explode (",", $data->description);  
+                        for($i = 0; $i < count($str_arr); $i++)  {
+                            echo $str_arr[$i]."<br/>";
+                        } 
+                        
+                    
+                    
+                        ?>
+                        </p>
+                        </div>
+                    @endforeach
+                   
+                   
                 </div>
                 
             </div>
@@ -201,50 +207,86 @@
                 </ul>
             </div>
         </section>
+        @elseif($row->categoryname=='About')
+        <!-- About-->
+        <section class="page-section" id="about">
+            <div class="container">
+               
+               
+                    <?php $c=0;?>
+                    @foreach($about as $row)
+                    <ul class="timeline">
+                    @if(($c%2)==0)  
+                    <li>
+                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="{{$row->image}}" /></div>
+                        <div class="timeline-panel">
+                        <div class="timeline-heading">
+                               
+                                <h4 class="subheading">{{$row->aboutdetails}}</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">{{$row->description}}</p></div>
+                        </div>
+                       
+                    </li>
+                    <?php $c++ ?>
+
+                    @elseif(($c%2)==1) 
+                    <li class="timeline-inverted">
+
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{{$row->image}}"  /></div>
+                        <div class="timeline-panel">
+                        <div class="timeline-heading">
+                               
+                                <h4 class="subheading">{{$row->aboutdetails}}</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">{{$row->description}}</p></div>
+                        </div>
+                       
+                    </li>
+                    <?php $c++ ?>
+                    @endif
+                   @endforeach
+                    
+                   
+
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>Be Part<br />Of Our<br />Story!</h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
         @elseif($row->categoryname=='Team')
         <!-- Team-->
         <section class="page-section bg-light" id="team">
             <div class="container">
                 
                 <div class="row">
-                @foreach($team as $row)
-                    <div class="col-lg-4">
+                      @foreach($team as $row)
+                      <div class="col-lg-4">
+
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="" />
+                            <img class="mx-auto rounded-circle" src="{{$row->image}}" alt="" />
                             <h4>{{$row->membersname}}</h4>
                             <p class="text-muted">{{$row->description}}</p>
                             <!-- <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a> -->
                         </div>
                         </div>
                         @endforeach
-                </div>  
-            </div>
-        </section>
-        <!-- Clients-->
-        <section class="py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="assets/img/logos/envato.jpg" alt="" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="assets/img/logos/designmodo.jpg" alt="" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="assets/img/logos/themeforest.jpg" alt="" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="assets/img/logos/creative-market.jpg" alt="" /></a>
-                    </div>
+                    
+                 
                 </div>
+                
             </div>
+
         </section>
+        
         @elseif($row->categoryname=='Contact')
-  
         <!-- Contact-->
         <section class="page-section" id="contact">
-            <div class="container ">
-                
+
+            <div class="container">
                 <form id="contactForm" name="sentMessage" novalidate="novalidate">
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-6">
@@ -275,22 +317,31 @@
                 </form>
             </div>
         </section>
-    
+        @endif
+        @endforeach
+        <a  href=""><img style="margin-left:10%;position:absolute" hieght="200" width="200"src="http://academy.bestowersolutions.com/wp-content/uploads/2019/10/logo.png" alt="Bestower solution"></a>
+        <div style="color:#ffed4a; margin-left:60%">
+        @foreach($comp as $data)
+              {{$data->companyname}}<br>
+               {{$data->address}} <br>
+           {{$data->email}}<br>
+             {{$data->contactno}}<br>
+              {{$data->contactperson}}
+         @endforeach
+    </div>
         <!-- Footer-->
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
                     <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                     <div class="col-lg-4 text-lg-right"><a class="mr-3" href="#!">Privacy Policy</a><a href="#!">Terms of Use</a></div>
                 </div>
+                    </div>
             </div>
+
         </footer>
-        @endif  
-        @endforeach
-       
    
         <!-- Bootstrap core JS-->
        
@@ -306,6 +357,11 @@
     <script src="owl/js/app.js"></script>
     <script>
             $(document).ready(function() {
+                $('#myTab a').on('click', function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+                })
+            
               var owl = $('.owl-carousel');
               owl.owlCarousel({
                 items: 4,

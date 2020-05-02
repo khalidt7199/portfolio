@@ -32,7 +32,9 @@ class PortfolioController extends Controller
             $data->subcategory;
             $prd[] = $data;
         }
-        return view('index',compact('cat','subcat','about','team','comp', 'prd'));
+        $servicedetail=DB::table('categories')->join('subcategories','categories.catID','=','subcategories.catID')
+        ->where('categories.categoryname','Services')->get();
+        return view('index',compact('cat','servicedetail','subcat','about','team','comp', 'prd'));
         //return dd($prd);
     }
 
